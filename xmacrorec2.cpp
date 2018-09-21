@@ -38,8 +38,9 @@
 /***************************************************************************** 
  * Includes
  ****************************************************************************/
-#include <stdio.h>		
+#include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 #include <X11/Xlibint.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -76,8 +77,10 @@ const float DefaultScale = 1.0;
 /***************************************************************************** 
  * Globals...
  ****************************************************************************/
-int   Delay = DefaultDelay;
-float Scale = DefaultScale;
+int   				Delay 						= DefaultDelay;
+float 				Scale 						= DefaultScale;
+unsigned long long 	LastActionTime 				= (unsigned long long)-1;
+bool				RecordTimeDifference		= false;
 
 using namespace std;
 
@@ -161,6 +164,10 @@ void parseCommandLine (int argc, char * argv[]) {
 	if ( strcmp (argv[Index], "-h" ) == 0 ) {
 	  // yep, show usage and exit
 	  usage ( EXIT_SUCCESS );
+	}
+
+	if ( strcmp (argv[Index], "-r" ) == 0 ) {
+	  RecordTimeDifference = true;
 	}
 
 	// is this '-s'?
@@ -326,6 +333,10 @@ void eventCallback(XPointer priv, XRecordInterceptData *d)
   unsigned short *ud2, seq;
   short *d2, rootx, rooty, eventx, eventy, kstate;
 
+  struct timeval tp;
+  unsigned long long time;
+  long long timeDifference;
+
   if (d->category==XRecordStartOfData) cerr << "Got Start Of Data" << endl;
   if (d->category==XRecordEndOfData) cerr << "Got End Of Data" << endl;
   if (d->category!=XRecordFromServer || p->doit==0)
@@ -368,7 +379,24 @@ void eventCallback(XPointer priv, XRecordInterceptData *d)
   	cerr << "  coordinates! This event is now ignored!" << endl;
   	goto returning;
   }
-  // what did we get?
+
+  gettimeofday(&tp, NULL);
+  time = (unsigned long long)(tp.tv_sec * 1000 + tp.tv_usec / 1000);
+
+  if(LastActionTime == (unsigned long long)-1)
+  {
+	  cout << "DelayMsUnscaled " << 80 << endl;
+  }
+  else if(RecordTimeDifference)
+  {
+	  timeDifference = time - LastActionTime;
+  	  cout << "DelayMs " << timeDifference << endl;
+  }
+
+  LastActionTime = time;
+
+
+	// what did we get?
   switch (type) {
     case ButtonPress:
 	  // button pressed, create event
@@ -440,6 +468,7 @@ void eventCallback(XPointer priv, XRecordInterceptData *d)
 	  cout << "KeyStrRelease " << XKeysymToString(XKeycodeToKeysym(p->LocalDpy,detail,0)) << endl;
 	  break;
   }
+
 returning:
   XRecordFreeData(d);
 }

@@ -77,6 +77,7 @@ const float DefaultScale = 1.0;
  ****************************************************************************/
 int   Delay = DefaultDelay;
 float Scale = DefaultScale;
+float SpeedMultiplier = 1.0f;
 char * Remote;
 
 using namespace std;
@@ -98,6 +99,7 @@ void usage (const int exitCode) {
 	   << "              Default: 10ms."
 	   << endl
 	   << "  -s  FACTOR  scalefactor for coordinates. Default: 1.0." << endl
+	   << "  -f  FACTOR  speed multiplier. Default: 1.0." << endl
 	   << "  -v          show version. " << endl
 	   << "  -h          this help. " << endl << endl;
 
@@ -153,6 +155,17 @@ void parseCommandLine (int argc, char * argv[]) {
 	  // yep, show usage and exit
 	  usage ( EXIT_SUCCESS );
 	}
+
+	if ( strcmp (argv[Index], "-f" ) == 0 && Index + 1 < argc ) {
+	  // yep, and there seems to be a parameter too, interpret it as a
+	  // floating point number
+	  if ( sscanf ( argv[Index + 1], "%f", &SpeedMultiplier ) != 1 ) {
+	    // oops, not a valid intereger
+	    cerr << "Invalid parameter for '-s'." << endl;
+	    usage ( EXIT_FAILURE );
+	  }
+	  Index++;
+    }
 
 	// is this '-d'?
 	else if ( strcmp (argv[Index], "-d" ) == 0 && Index + 1 < argc ) {
@@ -348,6 +361,20 @@ void eventLoop (Display * RemoteDpy, int RemoteScreen) {
 	  cin >> b;
 	  cout << "Delay: " << b << endl;
 	  sleep ( b );
+	}
+    else if (!strcasecmp("DelayMs",ev))
+    {
+	  cin >> b;
+	  cout << "DelayMs: " << b << endl;
+	  double ms = (double)b * 1000.0f;
+	  ms *= (double)SpeedMultiplier;
+	  usleep ( (int)ms );
+    }
+	else if (!strcasecmp("DelayMsUnscaled",ev))
+	{
+	  cin >> b;
+	  cout << "DelayMsUnscaled: " << b << endl;
+	  usleep ( b * 1000 );
 	}
 	else if (!strcasecmp("ButtonPress",ev))
 	{
