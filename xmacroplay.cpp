@@ -32,9 +32,21 @@
 #endif
 
 /***************************************************************************** 
+ * What iostream do we have?
+ ****************************************************************************/
+#define HAVE_IOSTREAM
+#ifdef HAVE_IOSTREAM
+#include <iostream>
+#include <iomanip>
+#else
+#include <iostream.h>
+#include <iomanip.h>
+#endif
+
+/***************************************************************************** 
  * Includes
  ****************************************************************************/
-#include <stdio.h>		
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
@@ -50,14 +62,6 @@
 /***************************************************************************** 
  * What iostream do we have?
  ****************************************************************************/
-#define HAVE_IOSTREAM
-#ifdef HAVE_IOSTREAM
-#include <iostream>
-#include <iomanip>
-#else
-#include <iostream.h>
-#include <iomanip.h>
-#endif
 
 #define PROG "xmacroplay"
 
