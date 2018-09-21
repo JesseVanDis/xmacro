@@ -1,6 +1,12 @@
+#!/bin/bash
+cd "$(dirname "$0")"
+
 
 if [ -f ~/.macro/scripts/macro_a_recording.bool ]; then
 	notify-send "Xmacro" "Recording ended"
+	./cleanupmacro.sh ~/.macro/scripts/macro_a.txt > ~/.macro/scripts/macro_a_clean.txt
+	rm -rf ~/.macro/scripts/macro_a.txt
+	mv ~/.macro/scripts/macro_a_clean.txt ~/.macro/scripts/macro_a.txt
 	rm -rf ~/.macro/scripts/macro_a_recording.bool
 else
 	if [ ! -f ~/.macro/scripts/macro_a_playing.bool ]; then

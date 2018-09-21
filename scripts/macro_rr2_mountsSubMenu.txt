@@ -124,6 +124,7 @@ DelayMs 8
 DelayMs 16
 DelayMs 8
 DelayMs 8
+MotionNotify 938 110
 DelayMs 440
 ################################# guild menu
 MotionNotify 938 110

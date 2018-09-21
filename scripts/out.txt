@@ -1,0 +1,2 @@
+rr2 - [~/projects/rr-tournament/code] - .../client/sources/ui/uiupgradablecontrol.cpp - CLion 2017.2.3
+It's there!
