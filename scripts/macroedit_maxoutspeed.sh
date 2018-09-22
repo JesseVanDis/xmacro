@@ -13,14 +13,19 @@ iterate()
 		rm -rf ./temp2.txt~
 	fi
 
+	lastLine=""
+
 	while IFS= read -r line; do
-		if [[ "$line" = *"DelayMs "* ]]; then
-			line="DelayMs 2"
+		if [[ "$lastLine" = *"KeyStrPress "* ]] && [[ "$line" = *"DelayMs "* ]]; then
+			line=""
+		elif [[ "$line" = *"DelayMs "* ]]; then
+			line="DelayMs 1.5"
 		fi
 
 		if [ ! "$line" = "" ]; then
 			echo "$line" >> ./temp2.txt~
 		fi
+		lastLine=$line
 	done < ./temp.txt~
 	rm ./temp.txt~
 	mv ./temp2.txt~ ./temp.txt~
