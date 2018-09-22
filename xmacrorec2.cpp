@@ -385,7 +385,7 @@ void eventCallback(XPointer priv, XRecordInterceptData *d)
 
   if(LastActionTime == (unsigned long long)-1)
   {
-	  cout << "DelayMsUnscaled " << 80 << endl;
+	//cout << "DelayMsUnscaled " << 80 << endl;
   }
   else if(RecordTimeDifference)
   {

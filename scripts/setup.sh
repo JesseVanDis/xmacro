@@ -1,8 +1,11 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
+homeDir=$(eval echo "~$USER")
+
 dpkg -s xdotool 2>/dev/null >/dev/null || sudo apt-get -y install xdotool
 dpkg -s libxtst-dev 2>/dev/null >/dev/null || sudo apt-get -y install libxtst-dev
+dpkg -s xbindkeys 2>/dev/null >/dev/null || sudo apt-get -y install xbindkeys
 
 if [ ! -d ~/.xmacro ]; then
 	mkdir ~/.xmacrogit
@@ -16,6 +19,7 @@ if [ ! -d ~/.xmacro ]; then
 	cd ~/.xmacro
 	rm -rdf ~/.xmacro/xmacro
 	make all
+
 
 	#Super key:                 <Super>
 	#Control key:               <Primary> or <Control>
@@ -35,13 +39,51 @@ if [ ! -d ~/.xmacro ]; then
 
 	cd "$(dirname "$0")"
 
-	homeDir=$(eval echo "~$USER")
+	# F1 key is set via 'xbindkeys'
 	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh" '<Alt>1'
-	python3 ./keybindings.py 'end/play macro' "${homeDir}/.xmacro/scripts/playmacro.sh" 'F1'
+#	python3 ./keybindings.py 'set macro playspeed MAX' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max" '<Control>`' # set via xbindkeys
 	python3 ./keybindings.py 'set macro playspeed X1' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 1" '<Control>1'
 	python3 ./keybindings.py 'set macro playspeed X2' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.5" '<Control>2'
 	python3 ./keybindings.py 'set macro playspeed X4' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.25" '<Control>3'
 	python3 ./keybindings.py 'set macro playspeed X10' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.1" '<Control>4'
 fi
+
+# specifically for F1 key up
+if [ ! -f ${homeDir}/.xbindkeysrc ]; then
+	cd "$(dirname "$0")"
+
+	# how to create key bindings:
+	#https://askubuntu.com/questions/670209/how-can-i-make-keyboard-shortcuts-register-on-key-release-rather-than-on-key-pr
+
+	xbindkeys --defaults > ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Mod2 + F1" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max\"" >> ${homeDir}/.xbindkeysrc
+	echo "    Control + grave" >> ${homeDir}/.xbindkeysrc
+
+	containsLine="0"
+	echo "" > ./newxinitrc~
+	while IFS= read -r line; do
+		if [[ "$line" = *"xbindkeys"* ]]; then
+			echo "xbindkeys found already in /etc/X11/xinit/xinitrc"
+			containsLine="1"
+		elif [[ "$line" = *"/etc/X11/Xsession"* ]]; then
+			echo "xbindkeys" >> ./newxinitrc~			
+		fi
+
+		echo "${line}" >> ./newxinitrc~
+	done < /etc/X11/xinit/xinitrc
+
+	if [ "${containsLine}" = "0" ]; then
+		sudo rm -rdf /etc/X11/xinit/xinitrc
+		sudo mv ./newxinitrc~ /etc/X11/xinit/xinitrc
+	fi
+fi
+
+
 
 

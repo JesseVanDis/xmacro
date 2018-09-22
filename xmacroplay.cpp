@@ -350,6 +350,7 @@ void eventLoop (Display * RemoteDpy, int RemoteScreen) {
   char ev[200], str[1024];
   int x, y;
   unsigned int b;
+  double bf;
   KeySym ks;
   KeyCode kc;
   
@@ -368,9 +369,9 @@ void eventLoop (Display * RemoteDpy, int RemoteScreen) {
 	}
     else if (!strcasecmp("DelayMs",ev))
     {
-	  cin >> b;
-	  cout << "DelayMs: " << b << endl;
-	  double ms = (double)b * 1000.0f;
+	  cin >> bf;
+	  cout << "DelayMs: " << bf << endl;
+	  double ms = (double)bf * 1000.0;
 	  ms *= (double)SpeedMultiplier;
 	  usleep ( (int)ms );
     }
