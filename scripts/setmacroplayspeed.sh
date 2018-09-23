@@ -4,5 +4,5 @@ else
 	notify-send "Xmacro" "Play speed set to: 1 / $1"
 fi
 
-echo "$1" > ~/.xmacro/scripts/macro_speed.txt
+echo "$1" > ~/.xmacro/.cache/macro_speed.txt
 

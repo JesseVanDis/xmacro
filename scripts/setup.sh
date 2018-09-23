@@ -17,6 +17,7 @@ if [ ! -d ~/.xmacro ]; then
 	mv xmacro .xmacro
 	rm -rdf ~/.xmacrogit
 	cd ~/.xmacro
+	mkdir -p ~/.xmacro/.cache
 	rm -rdf ~/.xmacro/xmacro
 	make all
 
