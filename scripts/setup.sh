@@ -36,21 +36,23 @@ if [ ! -d ~/.xmacro ]; then
 	#Numpad multiply (Asterisk):KP_Multiply
 	#Numpad number key(s):      KP_1
 	#Numpad `-`:                KP_Subtract
-
-	cd "$(dirname "$0")"
-
-	# F1 key is set via 'xbindkeys'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh" '<Alt>1'
-#	python3 ./keybindings.py 'set macro playspeed MAX' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max" '<Control>`' # set via xbindkeys
-	python3 ./keybindings.py 'set macro playspeed X1' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 1" '<Control>1'
-	python3 ./keybindings.py 'set macro playspeed X2' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.5" '<Control>2'
-	python3 ./keybindings.py 'set macro playspeed X4' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.25" '<Control>3'
-	python3 ./keybindings.py 'set macro playspeed X10' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.1" '<Control>4'
 fi
 
 # specifically for F1 key up
 if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	cd "$(dirname "$0")"
+
+	# F1 key is set via 'xbindkeys'
+	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh a" '<Alt>1'
+	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh b" '<Alt>2'
+	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh c" '<Alt>3'
+	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh d" '<Alt>4'
+#	python3 ./keybindings.py 'set macro playspeed MAX' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max" '<Control>`' # set via xbindkeys
+	python3 ./keybindings.py 'set macro playspeed X1' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 1" '<Control>1'
+	python3 ./keybindings.py 'set macro playspeed X2' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.5" '<Control>2'
+	python3 ./keybindings.py 'set macro playspeed X4' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.25" '<Control>3'
+	python3 ./keybindings.py 'set macro playspeed X10' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.1" '<Control>4'
+
 
 	# how to create key bindings:
 	#https://askubuntu.com/questions/670209/how-can-i-make-keyboard-shortcuts-register-on-key-release-rather-than-on-key-pr
@@ -58,12 +60,29 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	xbindkeys --defaults > ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
-	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh\"" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh a\"" >> ${homeDir}/.xbindkeysrc
 	echo "    release+Mod2 + F1" >> ${homeDir}/.xbindkeysrc
+
+#	used for renaming
+#	echo "" >> ${homeDir}/.xbindkeysrc
+#	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh b\"" >> ${homeDir}/.xbindkeysrc
+#	echo "    release+Mod2 + F2" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh c\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Mod2 + F3" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh d\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Mod2 + F4" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max\"" >> ${homeDir}/.xbindkeysrc
 	echo "    Control + grave" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh maxvim\"" >> ${homeDir}/.xbindkeysrc
+	echo "    Control + Tab" >> ${homeDir}/.xbindkeysrc
 
 	containsLine="0"
 	echo "" > ./newxinitrc~

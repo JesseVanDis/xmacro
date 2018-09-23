@@ -4,6 +4,13 @@ cd "$(dirname "$0")"
 input=$1
 
 iterationIndex=0
+minDelay=${2}
+
+if [ -z "${minDelay}" ]; then
+	# 1.5 is shorting in input mode
+	# 40 is shortest in vim mode
+	minDelay="40"
+fi
 
 cp $input ./temp.txt~
 
@@ -19,7 +26,8 @@ iterate()
 		if [[ "$lastLine" = *"KeyStrPress "* ]] && [[ "$line" = *"DelayMs "* ]]; then
 			line=""
 		elif [[ "$line" = *"DelayMs "* ]]; then
-			line="DelayMs 1.5"
+#			line="DelayMs 1.5"
+			line="DelayMs ${minDelay}"
 		fi
 
 		if [ ! "$line" = "" ]; then

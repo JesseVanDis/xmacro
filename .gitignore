@@ -4,6 +4,16 @@ xmacrorec2
 *.*~
 */macro_a.txt
 */macro_a_max.txt
+*/macro_a_maxvim.txt
+*/macro_b.txt
+*/macro_b_max.txt
+*/macro_b_maxvim.txt
+*/macro_c.txt
+*/macro_c_max.txt
+*/macro_c_maxvim.txt
+*/macro_d.txt
+*/macro_d_max.txt
+*/macro_d_maxvim.txt
 */macro_speed.txt
 newxinitrc~
 keylog.txt
