@@ -89,6 +89,10 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh maxvim\"" >> ${homeDir}/.xbindkeysrc
 	echo "    Control + equal" >> ${homeDir}/.xbindkeysrc
 
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/dowhatimean.sh\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+grave" >> ${homeDir}/.xbindkeysrc
+
 	containsLine="0"
 	echo "" > ./newxinitrc~
 	while IFS= read -r line; do
