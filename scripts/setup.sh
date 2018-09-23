@@ -81,8 +81,12 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	echo "    Control + grave" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max\"" >> ${homeDir}/.xbindkeysrc
+	echo "    Control + minus" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh maxvim\"" >> ${homeDir}/.xbindkeysrc
-	echo "    Control + Tab" >> ${homeDir}/.xbindkeysrc
+	echo "    Control + equal" >> ${homeDir}/.xbindkeysrc
 
 	containsLine="0"
 	echo "" > ./newxinitrc~
