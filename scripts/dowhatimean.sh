@@ -2,9 +2,12 @@
 cd "$(dirname "$0")"
 
 windowTitle=$(xdotool getwindowfocus getwindowname)
-echo "$windowTitle" > ~/.xmacro/.cache/windowTitle.txt
+windowProcess=$(ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}')
 
-#notify-send "Xmacro" "$windowTitle"
+echo "$windowTitle" > ~/.xmacro/.cache/windowTitle.txt
+echo "$windowProcess" > ~/.xmacro/.cache/windowProcess.txt
+
+#notify-send "Xmacro" "$windowProcess"
 
 didExecute="0"
 cd ./dowhatimean

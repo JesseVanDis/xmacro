@@ -6,6 +6,7 @@ homeDir=$(eval echo "~$USER")
 dpkg -s xdotool 2>/dev/null >/dev/null || sudo apt-get -y install xdotool
 dpkg -s libxtst-dev 2>/dev/null >/dev/null || sudo apt-get -y install libxtst-dev
 dpkg -s xbindkeys 2>/dev/null >/dev/null || sudo apt-get -y install xbindkeys
+dpkg -s xsel 2>/dev/null >/dev/null || sudo apt-get -y install xsel
 
 if [ ! -d ~/.xmacro ]; then
 	mkdir ~/.xmacrogit
