@@ -4,6 +4,8 @@ cd "$(dirname "$0")"
 windowTitle=$(xdotool getwindowfocus getwindowname)
 echo "$windowTitle" > ~/.xmacro/.cache/windowTitle.txt
 
+#notify-send "Xmacro" "$windowTitle"
+
 didExecute="0"
 cd ./dowhatimean
 for f in ./*.sh; do
