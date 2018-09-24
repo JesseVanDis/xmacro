@@ -41,7 +41,7 @@ fi
 
 # specifically for F1 key up
 if [ ! -f ${homeDir}/.xbindkeysrc ]; then
-	cd "$(dirname "$0")"
+	cd ${homeDir}/.xmacro/scripts
 
 	# F1 key is set via 'xbindkeys'
 	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh a" '<Alt>1'
