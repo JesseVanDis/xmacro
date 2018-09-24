@@ -34,7 +34,7 @@ if [ "$WindowProcess" = "nautilus" ]; then
 		perl -pi -e $Query $FileName
 
 		From="(?<=name..sourcepsd..).*(?=<)"
-		To="\"${File}.psd\""
+		To="${File}.psd"
 		Query='s/'$From'/'$To'/g;'
 		perl -pi -e $Query $FileName
 
