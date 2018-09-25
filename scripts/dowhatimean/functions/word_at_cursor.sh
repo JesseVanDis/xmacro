@@ -16,6 +16,8 @@ skip="0"
 if [ ! -z "${3}" ]; then
 	skip=${3}
 fi
+#notify-send "Xmacro" "skip: '${skip}'"
+
 for i in $(seq 1 ${#text})
 do
 	justSelected="0"
@@ -25,7 +27,7 @@ do
 	if [ "${ind}" = "${i}" ]; then
 		#echo "select"
 		shouldSelect=1
-		justSelected="1"
+		#justSelected="1"
 	fi
 
 	if [ "$c1" = " " ] || [ "$c1" = "\t" ]; then
@@ -43,5 +45,5 @@ do
 	fi
 done
 
-echo "'$word'"
+printf "$word"
 

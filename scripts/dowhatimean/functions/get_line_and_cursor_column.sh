@@ -107,5 +107,5 @@ done
 lineWithReplacedTabs=$(echo "$line" | sed "s/\t/ /g")
 
 
-echo "$column: $lineWithReplacedTabs"
+printf "$column: $lineWithReplacedTabs"
 
