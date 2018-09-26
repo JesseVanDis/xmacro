@@ -7,6 +7,7 @@ dpkg -s xdotool 2>/dev/null >/dev/null || sudo apt-get -y install xdotool
 dpkg -s libxtst-dev 2>/dev/null >/dev/null || sudo apt-get -y install libxtst-dev
 dpkg -s xbindkeys 2>/dev/null >/dev/null || sudo apt-get -y install xbindkeys
 dpkg -s xsel 2>/dev/null >/dev/null || sudo apt-get -y install xsel
+dpkg -s xclip 2>/dev/null >/dev/null || sudo apt-get -y install xclip
 
 if [ ! -d ~/.xmacro ]; then
 	mkdir ~/.xmacrogit
@@ -46,9 +47,13 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 
 	# F1 key is set via 'xbindkeys'
 	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh a" '<Alt>1'
+	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh a" '<Alt>KP_1'
 	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh b" '<Alt>2'
+	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh b" '<Alt>KP_2'
 	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh c" '<Alt>3'
+	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh c" '<Alt>KP_3'
 	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh d" '<Alt>4'
+	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh d" '<Alt>KP_4'
 #	python3 ./keybindings.py 'set macro playspeed MAX' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max" '<Control>`' # set via xbindkeys
 	python3 ./keybindings.py 'set macro playspeed X1' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 1" '<Control>1'
 	python3 ./keybindings.py 'set macro playspeed X2' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.5" '<Control>2'
@@ -63,20 +68,19 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh a\"" >> ${homeDir}/.xbindkeysrc
-	echo "    release+Mod2 + F1" >> ${homeDir}/.xbindkeysrc
+	echo "    release+KP_End" >> ${homeDir}/.xbindkeysrc
 
-#	used for renaming
-#	echo "" >> ${homeDir}/.xbindkeysrc
-#	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh b\"" >> ${homeDir}/.xbindkeysrc
-#	echo "    release+Mod2 + F2" >> ${homeDir}/.xbindkeysrc
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh b\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+KP_Down" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh c\"" >> ${homeDir}/.xbindkeysrc
-	echo "    release+Mod2 + F3" >> ${homeDir}/.xbindkeysrc
+	echo "    release+KP_Next" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/playmacro.sh d\"" >> ${homeDir}/.xbindkeysrc
-	echo "    release+Mod2 + F4" >> ${homeDir}/.xbindkeysrc
+	echo "    release+KP_Left" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max\"" >> ${homeDir}/.xbindkeysrc
