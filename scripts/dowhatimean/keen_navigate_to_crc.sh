@@ -8,7 +8,7 @@ source ./header.sh
 strokeDelay="40"
 
 #rr2 - [/media/jvandis/ssd/projects/rr-tournament/code] - .../client/build/linux/debug/include/soldierbehaviours.hpp - CLion 2017.2.3
-if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *"rr2"* ]] && [[ "$WindowTitle" = *"debug/include"* ]]; then
+if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *"rr2"* ]] && [[ "$WindowTitle" = *"debug/include"* ]] && [[ ! "$WindowTitle" = *"_bdef"* ]]; then
 
 	filename=$(./functions/get_filename.sh)
 	fileCrc="${filename%.*}.crc"
