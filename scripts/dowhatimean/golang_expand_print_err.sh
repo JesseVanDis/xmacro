@@ -38,15 +38,13 @@ if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
 		singleErr="1"
 	fi
 
-	notify-send "Xmacro" "'$wordAtCursor' = 'error': ${singleErr}"
-
+	#notify-send "Xmacro" "'$wordAtCursor' = 'error': ${singleErr}"
 
 	if [ "$singleErr" = "1" ]; then
 		uniqueId=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 
-
 		clipboardContents=`xsel -ob`
-		printf "fmt.Println(\"error. id: $uniqueId\")" | xclip -selection clipboard
+		printf "fmt.Println(\"error: id $uniqueId\")" | xclip -selection clipboard
 		echo "#" > $t
 		echo "DelayMs $strokeDelay" >> $t
 		echo "KeyStrPress End" >> $t
@@ -69,6 +67,32 @@ if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
 		echo "KeyStrRelease Control_L" >> $t
 
 		~/.xmacro/xmacroplay -d 0 "$DISPLAY" < $t > ~/.xmacro/.cache/garbage
+
+		echo "#" > $t
+		echo "DelayMs $strokeDelay" >> $t
+		echo "KeyStrPress Left" >> $t
+		echo "KeyStrRelease Left" >> $t
+		echo "DelayMs $strokeDelay" >> $t
+		echo "KeyStrPress Left" >> $t
+		echo "KeyStrRelease Left" >> $t
+		echo "DelayMs $strokeDelay" >> $t
+		echo "KeyStrPress Control_L" >> $t
+		echo "KeyStrPress Shift_L" >> $t
+		echo "DelayMs $strokeDelay" >> $t
+		echo "KeyStrPress Left" >> $t
+		echo "KeyStrRelease Left" >> $t
+		echo "DelayMs $strokeDelay" >> $t
+		echo "KeyStrPress Left" >> $t
+		echo "KeyStrRelease Left" >> $t
+		echo "DelayMs $strokeDelay" >> $t
+		echo "KeyStrRelease Control_L" >> $t
+		echo "DelayMs $strokeDelay" >> $t
+		echo "KeyStrRelease Shift_L" >> $t
+		echo "DelayMs $strokeDelay" >> $t
+
+		~/.xmacro/xmacroplay -d 0 "$DISPLAY" < $t > ~/.xmacro/.cache/garbage
+	
+		rm -rf $t
 
 		echo "1"; exit
 	fi
