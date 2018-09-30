@@ -4,12 +4,80 @@ source ../header.sh
 
 t=~/.xmacro/.cache/t
 
+if [ -f ~/.xmacro/.cache/line ]; then
+	savedLine=$(head -n 1 ~/.xmacro/.cache/line)
+	printf "$savedLine"
+	exit		
+fi
+
+
 clipboardContents=`xsel -ob`
 
 #export MinKeystrokeDelay=40
 
-strokeDelay=40
+strokeDelay=20
 
+echo "KeyStrPress Escape" > $t
+echo "KeyStrRelease Escape" >> $t
+echo "DelayMs $strokeDelay" >> $t
+echo "KeyStrPress Shift_L" >> $t
+echo "KeyStrPress End" >> $t
+echo "KeyStrRelease End" >> $t
+echo "DelayMs $strokeDelay" >> $t
+echo "KeyStrRelease Shift_L" >> $t
+echo "DelayMs $strokeDelay" >> $t
+echo "KeyStrPress Control_L" >> $t
+echo "KeyStrPress c" >> $t
+echo "KeyStrRelease c" >> $t
+echo "DelayMs $strokeDelay" >> $t
+echo "KeyStrRelease Control_L" >> $t
+echo "DelayMs $strokeDelay" >> $t
+
+~/.xmacro/xmacroplay -d 0 "$DISPLAY" < $t > ~/.xmacro/.cache/garbage
+lineEnd=`xsel -ob`
+
+echo "DelayMs $strokeDelay" > $t
+echo "KeyStrPress Shift_L" >> $t
+echo "KeyStrPress Home" >> $t
+echo "KeyStrRelease Home" >> $t
+echo "DelayMs $strokeDelay" >> $t
+echo "KeyStrPress Home" >> $t
+echo "KeyStrRelease Home" >> $t
+echo "DelayMs $strokeDelay" >> $t
+echo "KeyStrRelease Shift_L" >> $t
+echo "DelayMs $strokeDelay" >> $t
+echo "KeyStrPress Control_L" >> $t
+echo "KeyStrPress c" >> $t
+echo "KeyStrRelease c" >> $t
+echo "DelayMs $strokeDelay" >> $t
+echo "KeyStrRelease Control_L" >> $t
+echo "DelayMs $strokeDelay" >> $t
+
+~/.xmacro/xmacroplay -d 0 "$DISPLAY" < $t > ~/.xmacro/.cache/garbage
+lineStart=`xsel -ob`
+
+echo "DelayMs $strokeDelay" > $t
+echo "KeyStrPress Right" >> $t
+echo "KeyStrRelease Right" >> $t
+
+~/.xmacro/xmacroplay -d 0 "$DISPLAY" < $t > ~/.xmacro/.cache/garbage
+lineStart=`xsel -ob`
+
+wholeLine="${lineStart}${lineEnd}"
+column="${#lineStart}"
+
+#notify-send "Xmacro" "line: $column: $wholeLine"
+
+printf "${clipboardContents}" | xsel -ib
+rm -rf $t
+
+lineWithReplacedTabs=$(echo "$wholeLine" | sed "s/\t/ /g")
+
+echo "$column: $lineWithReplacedTabs" > ~/.xmacro/.cache/line
+printf "$column: $lineWithReplacedTabs"
+
+############ below depricated #############
+exit
 
 echo "KeyStrPress Escape" > $t
 echo "KeyStrRelease Escape" >> $t
@@ -106,6 +174,8 @@ done
 #lineWithReplacedTabs=$(echo "$line" | sed "s/\t/     /g")
 lineWithReplacedTabs=$(echo "$line" | sed "s/\t/ /g")
 
+notify-send "Xmacro" "$column: $lineWithReplacedTabs"
 
+echo "$column: $lineWithReplacedTabs" > ~/.xmacro/.cache/line
 printf "$column: $lineWithReplacedTabs"
 

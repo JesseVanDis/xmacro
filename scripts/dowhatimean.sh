@@ -1,6 +1,8 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
+rm -rf ~/.xmacro/.cache/line
+
 windowTitle=$(xdotool getwindowfocus getwindowname)
 windowProcess=$(ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}')
 

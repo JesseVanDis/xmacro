@@ -130,8 +130,6 @@ if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
 	fi
 
 	if [ "$wordAtCursor" = "for" ] && [ ! -z "${nextWordAtCursor}" ]; then
-		notify-send "Xmacro" "wuuu"
-
 		#for i, v := range henk {
 		#  |
 		#}
