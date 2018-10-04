@@ -1,5 +1,15 @@
 #!/bin/bash
 
+export GOPATH=$(pwd)/go
+
+if [ -d /usr/local/go ]; then
+	export PATH=$PATH:/usr/local/go/bin
+	export GOROOT=/usr/local/go
+else
+	export GOROOT=/usr/lib/go
+fi
+export PATH=$PATH:~/go/bin
+
 #export SelectedText=""
 export WordUnderCursor=""
 export WindowTitle=$(head -n 1 ~/.xmacro/.cache/windowTitle.txt)

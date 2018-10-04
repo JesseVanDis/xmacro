@@ -4,6 +4,18 @@ source ../header.sh
 
 #usage:  [cursor column][text][(amount of words to skip)]
 
+
+if [ -z "${1}" ]; then
+	lineUnderCursorResult=$(./get_line_and_cursor_column.sh)
+
+	cursorIndex=$(./get_cursor_from_lineandcursor.sh "${lineUnderCursorResult}")
+	line=$(./get_line_from_lineandcursor.sh "${lineUnderCursorResult}")
+	wordAtCursor=$(./word_at_cursor.sh ${cursorIndex} "${line}")
+	printf "$wordAtCursor"
+	exit
+fi
+
+
 wordStartIndex=0
 wordIndex=""
 wordLength=0
