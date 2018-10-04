@@ -46,19 +46,19 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	cd ${homeDir}/.xmacro/scripts
 
 	# F1 key is set via 'xbindkeys'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh a" '<Alt>1'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh a" '<Alt>KP_1'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh b" '<Alt>2'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh b" '<Alt>KP_2'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh c" '<Alt>3'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh c" '<Alt>KP_3'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh d" '<Alt>4'
-	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh d" '<Alt>KP_4'
-#	python3 ./keybindings.py 'set macro playspeed MAX' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max" '<Control>`' # set via xbindkeys
-	python3 ./keybindings.py 'set macro playspeed X1' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 1" '<Control>1'
-	python3 ./keybindings.py 'set macro playspeed X2' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.5" '<Control>2'
-	python3 ./keybindings.py 'set macro playspeed X4' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.25" '<Control>3'
-	python3 ./keybindings.py 'set macro playspeed X10' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.1" '<Control>4'
+#	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh a" '<Alt>1'
+#	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh a" '<Alt>KP_1'
+#	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh b" '<Alt>2'
+#	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh b" '<Alt>KP_2'
+#	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh c" '<Alt>3'
+#	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh c" '<Alt>KP_3'
+#	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh d" '<Alt>4'
+#	python3 ./keybindings.py 'record macro' "${homeDir}/.xmacro/scripts/recordmacro.sh d" '<Alt>KP_4'
+##	python3 ./keybindings.py 'set macro playspeed MAX' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max" '<Control>`' # set via xbindkeys
+#	python3 ./keybindings.py 'set macro playspeed X1' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 1" '<Control>1'
+#	python3 ./keybindings.py 'set macro playspeed X2' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.5" '<Control>2'
+#	python3 ./keybindings.py 'set macro playspeed X4' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.25" '<Control>3'
+#	python3 ./keybindings.py 'set macro playspeed X10' "${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.1" '<Control>4'
 
 
 	# how to create key bindings:
@@ -97,6 +97,51 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/dowhatimean.sh\"" >> ${homeDir}/.xbindkeysrc
 	echo "    release+grave" >> ${homeDir}/.xbindkeysrc
+
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh a\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Alt + 1" >> ${homeDir}/.xbindkeysrc
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh a\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Alt + KP_End" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh b\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Alt + 2" >> ${homeDir}/.xbindkeysrc
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh b\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Alt + KP_Down" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh c\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Alt + 3" >> ${homeDir}/.xbindkeysrc
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh c\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Alt + KP_Next" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh d\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Alt + 4" >> ${homeDir}/.xbindkeysrc
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh d\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Alt + KP_Left" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 1\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Control + 1" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.5\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Control + 2" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.25\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Control + 3" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.1\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+Control + 4" >> ${homeDir}/.xbindkeysrc
 
 	containsLine="0"
 	echo "" > ./newxinitrc~
