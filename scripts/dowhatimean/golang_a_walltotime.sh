@@ -18,7 +18,7 @@ if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
 
 		if [ -d ${GOROOT}/src/time ]; then
 			if [ ! -f ${GOROOT}/src/time/timeextended.go ]; then
-				xterm -e "echo 'time.go need to be edited so we can hack it to get proper data. type password to do so (since its in usr/local/go)' && sudo sh -c \"echo 'package time\n\nfunc (p *Time) SetWall(wall uint64) {\n    p.wall = wall\n}\n' > /usr/local/go/src/time/timeextended.go\""
+				xterm -e "echo 'time.go need to be edited so we can hack it to get proper data. type password to do so (since its in ${GOROOT})' && sudo sh -c \"echo 'package time\n\nfunc (p *Time) SetWall(wall uint64) {\n    p.wall = wall\n}\n' > ${GOROOT}/src/time/timeextended.go\""
 			fi
 		fi
 
@@ -55,8 +55,15 @@ if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
 			fi
 			notify-send "Xmacro" "$wordUnderCursor is time!!"
 		fi
+		
+		if [ ! -f ~/.xmacro/.cache/getgotime/getgotime ]; then
+			# building failed.. delete the hack thing so we can try again on the next attempt
+			xterm -e "echo 'building the time fetch tool failed. want to remove the go time.go hack now. type password to do so (since its in ${GOROOT})' && sudo sh -c \"rm -rf ${GOROOT}/src/time/timeextended.go\""
+			rm -rdf ~/.xmacro/.cache/getgotime
+		fi
+
 	else
-		notify-send "Xmacro" "$GOROOT"
+		notify-send "Xmacro" "$wordUnderCursor"
 	fi 
 
 	echo "1"; exit
