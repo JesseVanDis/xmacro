@@ -13,14 +13,28 @@ echo "$windowProcess" > ~/.xmacro/.cache/windowProcess.txt
 
 didExecute="0"
 cd ./dowhatimean
-for f in ./*.sh; do
-	if [ ! "${f}" = "./header.sh" ]; then
+
+if [ -f "./priorities.txt" ]; then
+	while IFS= read -r line
+	do
+		f="./${line}.sh"
 		didExecute=$($f)
 		if [ "${didExecute}" = "1" ]; then
 			break
 		fi
-	fi
-done
+		echo "$line"
+	done < "./priorities.txt"
+else
+	for f in ./*.sh; do
+		if [ ! "${f}" = "./header.sh" ]; then
+			didExecute=$($f)
+			if [ "${didExecute}" = "1" ]; then
+				break
+			fi
+		fi
+	done
+fi
+
 if [ "${didExecute}" = "0" ]; then
 	# type the character `..
 	clipboardContents=`xsel -ob`
