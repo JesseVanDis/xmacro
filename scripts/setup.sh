@@ -83,6 +83,10 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	echo "    release+KP_Left" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/abortmacro.sh\"" >> ${homeDir}/.xbindkeysrc
+	echo "    release+KP_Home" >> ${homeDir}/.xbindkeysrc
+
+	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max\"" >> ${homeDir}/.xbindkeysrc
 	echo "    Control + grave" >> ${homeDir}/.xbindkeysrc
 

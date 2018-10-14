@@ -43,6 +43,14 @@
 #include <iomanip.h>
 #endif
 
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string>
+#include <fstream>
+
+#include <sys/types.h>
+#include <pwd.h>
+
 /***************************************************************************** 
  * Includes
  ****************************************************************************/
@@ -125,6 +133,10 @@ void version () {
   exit ( EXIT_SUCCESS );
 }
 
+inline bool file_exists (const char* name) {
+  struct stat buffer;   
+  return (stat (name, &buffer) == 0); 
+}
 
 /****************************************************************************/
 /*! Parses the commandline and stores all data in globals (shudder). Exits
@@ -354,7 +366,16 @@ void eventLoop (Display * RemoteDpy, int RemoteScreen) {
   KeySym ks;
   KeyCode kc;
   
+  struct passwd *pw = getpwuid(getuid());
+  const char *cwd = pw->pw_dir;  
+  char abortPath[512];
+  sprintf(abortPath, "%s/.xmacro/.cache/abort.tmp", cwd);
+
   while ( !cin.eof() ) {
+	if(file_exists(abortPath)) {
+		break;
+	}
+
 	cin >> ev;
 	if (ev[0]=='#')
 	{
@@ -507,6 +528,19 @@ void eventLoop (Display * RemoteDpy, int RemoteScreen) {
 */
 /****************************************************************************/
 int main (int argc, char * argv[]) {
+
+  //char cwd[512];
+  //cwd[0] = '\0';
+  //getcwd(cwd, sizeof(cwd));
+  //readlink("~/", cwd, sizeof(cwd));
+
+  //struct passwd *pw = getpwuid(getuid());
+  //const char *cwd = pw->pw_dir;
+  
+  //char abortPath[512];
+  //sprintf(abortPath, "%s/.xmacro/.cache/abort.tmp", cwd);
+  //printf("%s, %d\n", abortPath, file_exists(abortPath));
+  //printf("%s, %d\n", "/home/jesse/.xmacro/.cache/abort.tmp", file_exists("/home/jesse/.xmacro/.cache/abort.tmp"));
 
   // parse commandline arguments
   parseCommandLine ( argc, argv );
