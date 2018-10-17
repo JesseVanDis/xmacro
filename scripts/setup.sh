@@ -99,7 +99,7 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	echo "    Control + equal" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
-	echo "\"${homeDir}/.xmacro/scripts/dowhatimean.sh\"" >> ${homeDir}/.xbindkeysrc
+	echo "\"${homeDir}/.xmacro/scripts/dowhatimean_withlog.sh\"" >> ${homeDir}/.xbindkeysrc
 	echo "    release+grave" >> ${homeDir}/.xbindkeysrc
 
 

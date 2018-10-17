@@ -1,3 +1,4 @@
+[f]get_selected_text
 cpp_generate_declaration
 expand_for_loop
 genericdataeditor_open_troto

@@ -11,14 +11,30 @@ t=~/.xmacro/.cache/t
 
 
 if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
-	wordUnderCursor=$(./functions/word_at_cursor.sh)
+	word=$(./functions/get_selected_text.sh)
 
-	# wall example: 13755602082817982997
-	if [ "${#wordUnderCursor}" = "20" ] && [ "${wordUnderCursor:0:1}" = "1" ] ; then
+	isLongTime="0"
+	isShortTime="0"
+	isTime="0"
+	if [ "${#word}" = "20" ] && [ "${word:0:1}" = "1" ]; then
+		# golang wall example: 13755602082817982997
+		isLongTime="1"
+		isTime="1"
+	elif [ "${#word}" = "11" ] && [ "${word:0:1}" = "6" ]; then
+		# golang example: 63669398400
+		isShortTime="1"
+		isTime="1"
+	fi
+
+	if [ ! "${isTime}" = "1" ]; then
+		word=$(./functions/word_at_cursor.sh)
+	fi
+
+	if [ "${isTime}" = "1" ] ; then
 
 		if [ -d ${GOROOT}/src/time ]; then
 			if [ ! -f ${GOROOT}/src/time/timeextended.go ]; then
-				xterm -e "echo 'time.go need to be edited so we can hack it to get proper data. type password to do so (since its in ${GOROOT})' && sudo sh -c \"echo 'package time\n\nfunc (p *Time) SetWall(wall uint64) {\n    p.wall = wall\n}\n' > ${GOROOT}/src/time/timeextended.go\""
+				xterm -e "echo 'time.go need to be edited so we can hack it to get proper data. type password to do so (since its in ${GOROOT})' && sudo sh -c \"echo 'package time\n\nfunc (p *Time) SetWall(wall uint64) {\n    p.wall = wall\n}\nfunc (p *Time) SetExt(ext int64) {\n    p.ext = ext\n}' > ${GOROOT}/src/time/timeextended.go\""
 			fi
 		fi
 
@@ -40,6 +56,7 @@ if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
 				echo "func main() {" >> ./main.go
 				echo "	argsWithoutProg := os.Args[1:]" >> ./main.go
 				echo "	arg := argsWithoutProg[0] //\"13755602082817982997\"" >> ./main.go
+				echo "	arg2 := argsWithoutProg[1]// \"63669398400\"" >> ./main.go
 				echo "	time := time.Now()" >> ./main.go
 				echo "" >> ./main.go
 				echo "	v, err := strconv.ParseUint(arg, 10, 64)" >> ./main.go
@@ -48,12 +65,26 @@ if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
 				echo "		return" >> ./main.go
 				echo "	}" >> ./main.go
 				echo "" >> ./main.go
+				echo "	v2, err2 := strconv.ParseInt(arg2, 10, 64)" >> ./main.go
+				echo "	if err2 != nil {" >> ./main.go
+				echo "		fmt.Println(\"error: failed to parse2 '\" + arg2 + \"': \" + err2.Error())" >> ./main.go
+				echo "		return" >> ./main.go
+				echo "	}" >> ./main.go
+				echo "" >> ./main.go
 				echo "	time.SetWall(v)" >> ./main.go
-				echo "	fmt.Printf(\"%v\n\", time)" >> ./main.go
+				echo "	time.SetExt(v)" >> ./main.go
+				echo "	fmt.Printf(\"%v\n\", time.UnixNano())" >> ./main.go
 				echo "}" >> ./main.go
 				go build
 			fi
-			notify-send "Xmacro" "$wordUnderCursor is time!!"
+			#notify-send "Xmacro" "$word is time!!"
+			if [ "${isLongTime}" = "1" ]; then
+				epochNano=$(~/.xmacro/.cache/getgotime/getgotime "${word}" "0")
+			else
+				epochNano=$(~/.xmacro/.cache/getgotime/getgotime "0" "${word}")				
+			fi
+			timestr=$(./functions/unix_nano_to_string.sh ${epochNano})
+			notify-send "Xmacro" "${timestr}"
 		fi
 		
 		if [ ! -f ~/.xmacro/.cache/getgotime/getgotime ]; then

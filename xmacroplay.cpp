@@ -373,6 +373,7 @@ void eventLoop (Display * RemoteDpy, int RemoteScreen) {
 
   while ( !cin.eof() ) {
 	if(file_exists(abortPath)) {
+		cout << "Aborted!!" << b << endl;
 		break;
 	}
 
