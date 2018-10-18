@@ -2,7 +2,7 @@
 cd "$(dirname "$0")"
 
 rm -rf ~/.xmacro/.cache/line
-#rm -rf ~/.xmacro/.cache/selectedtext
+rm -rf ~/.xmacro/.cache/selectedtext
 
 windowTitle=$(xdotool getwindowfocus getwindowname)
 windowProcess=$(ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}')
@@ -17,6 +17,7 @@ cd ./dowhatimean
 
 thingToDoNext=""
 thingToIgnore=""
+#echo "" > ~/text.txt
 
 if [ -f "./priorities.txt" ]; then
 	while IFS= read -r line

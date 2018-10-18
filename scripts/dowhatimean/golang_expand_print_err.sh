@@ -25,8 +25,8 @@ if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *".go "* ]]; then
 	done
 
 	echo "./functions/word_at_cursor.sh ${cursorIndex} \"${line}\"" > ~/command.txt
-	wordAtCursor=$(./functions/word_at_cursor.sh ${cursorIndex} "${line}")
-	nextWordAtCursor=$(./functions/word_at_cursor.sh ${cursorIndex} "${line}" 1)
+	wordAtCursor=$(./functions/word_at_line.sh "${line}" 1)
+	nextWordAtCursor=$(./functions/word_at_line.sh "${line}" 2)
 
 	#notify-send "Xmacro" "'${cursorIndex}', '${line}', '${wordAtCursor}', '${nextWordAtCursor}'"
 
