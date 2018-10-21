@@ -88,15 +88,11 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max\"" >> ${homeDir}/.xbindkeysrc
-	echo "    Control + grave" >> ${homeDir}/.xbindkeysrc
-
-	echo "" >> ${homeDir}/.xbindkeysrc
-	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh max\"" >> ${homeDir}/.xbindkeysrc
-	echo "    Control + minus" >> ${homeDir}/.xbindkeysrc
+	echo "    Alt + minus" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh maxvim\"" >> ${homeDir}/.xbindkeysrc
-	echo "    Control + equal" >> ${homeDir}/.xbindkeysrc
+	echo "    Alt + equal" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/dowhatimean_withlog.sh\"" >> ${homeDir}/.xbindkeysrc
@@ -105,28 +101,16 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh a\"" >> ${homeDir}/.xbindkeysrc
-	echo "    release+Alt + 1" >> ${homeDir}/.xbindkeysrc
-	echo "" >> ${homeDir}/.xbindkeysrc
-	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh a\"" >> ${homeDir}/.xbindkeysrc
 	echo "    release+Alt + KP_End" >> ${homeDir}/.xbindkeysrc
 
-	echo "" >> ${homeDir}/.xbindkeysrc
-	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh b\"" >> ${homeDir}/.xbindkeysrc
-	echo "    release+Alt + 2" >> ${homeDir}/.xbindkeysrc
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh b\"" >> ${homeDir}/.xbindkeysrc
 	echo "    release+Alt + KP_Down" >> ${homeDir}/.xbindkeysrc
 
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh c\"" >> ${homeDir}/.xbindkeysrc
-	echo "    release+Alt + 3" >> ${homeDir}/.xbindkeysrc
-	echo "" >> ${homeDir}/.xbindkeysrc
-	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh c\"" >> ${homeDir}/.xbindkeysrc
 	echo "    release+Alt + KP_Next" >> ${homeDir}/.xbindkeysrc
 
-	echo "" >> ${homeDir}/.xbindkeysrc
-	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh d\"" >> ${homeDir}/.xbindkeysrc
-	echo "    release+Alt + 4" >> ${homeDir}/.xbindkeysrc
 	echo "" >> ${homeDir}/.xbindkeysrc
 	echo "\"${homeDir}/.xmacro/scripts/recordmacro.sh d\"" >> ${homeDir}/.xbindkeysrc
 	echo "    release+Alt + KP_Left" >> ${homeDir}/.xbindkeysrc

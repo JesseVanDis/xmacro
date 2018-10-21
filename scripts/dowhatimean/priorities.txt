@@ -1,6 +1,7 @@
 [f]get_selected_text
 cpp_generate_declaration
-expand_for_loop
+golang_expand_for_loop
+js_expand_for_loop
 genericdataeditor_open_troto
 golang_expand_print_val
 golang_expand_print_err
