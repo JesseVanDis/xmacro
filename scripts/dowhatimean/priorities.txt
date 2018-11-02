@@ -9,4 +9,5 @@ genericdataeditor_open_troto
 golang_expand_print_val
 golang_expand_print_err
 golang_a_walltotime
+nautilus_convert_psd_to_png
 nautilus_update_product_file
