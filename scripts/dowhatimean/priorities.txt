@@ -3,6 +3,7 @@ keen_navigate_to_bdef
 keen_navigate_to_crc
 keen_navigate_to_ds
 [f]get_selected_text
+web_chromecalander_letter_to_date
 cpp_generate_declaration
 golang_expand_for_loop
 js_expand_for_loop
