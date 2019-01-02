@@ -13,7 +13,6 @@ copyDelay="70"
 t=~/.xmacro/.cache/web
 
 
-
 if [[ "$WindowTitle" = *"Google"* ]] && [[ "$WindowTitle" = *"alender"* ]] && [[ "$WindowTitle" = *"Chrome"* ]]; then
 #	notify-send "Xmacro" "kalender!!"
 

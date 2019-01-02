@@ -11,6 +11,7 @@ echo "$windowTitle" > ~/.xmacro/.cache/windowTitle.txt
 echo "$windowProcess" > ~/.xmacro/.cache/windowProcess.txt
 
 #notify-send "Xmacro" "$windowProcess"
+#notify-send "Xmacro" "$windowTitle"
 
 didExecute="0"
 cd ./dowhatimean
