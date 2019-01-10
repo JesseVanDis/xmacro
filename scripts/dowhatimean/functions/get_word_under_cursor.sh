@@ -8,6 +8,7 @@ if [ -f ~/.xmacro/.cache/line ]; then
 else
 	lineAndCursor=$(./get_line_and_cursor_column.sh)
 fi
+
 cursorIndex=$(./get_cursor_from_lineandcursor.sh "${lineAndCursor}")
 line=$(./get_line_from_lineandcursor.sh "${lineAndCursor}")
 

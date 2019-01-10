@@ -24,7 +24,9 @@ if [ -f "./priorities.txt" ]; then
 	while IFS= read -r line
 	do
 #		echo "${line}" >> ~/text.txt
-		if [[ "$line" = *"[f]"* ]]; then
+		if [[ "$line" = "#"* ]]; then
+			echo "skipping $line"
+		elif [[ "$line" = *"[f]"* ]]; then
 			functionName=${line:3}
 			echo "trying function: ${functionName}.sh"
 			functionResult=$(./functions/${functionName}.sh)
