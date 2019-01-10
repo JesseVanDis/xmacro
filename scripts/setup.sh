@@ -21,6 +21,7 @@ if [ ! -d ~/.xmacro ]; then
 	cd ~/.xmacro
 	mkdir -p ~/.xmacro/.cache
 	rm -rdf ~/.xmacro/xmacro
+	cd ~/.xmacro
 	make all
 
 
@@ -131,6 +132,8 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 	echo "\"${homeDir}/.xmacro/scripts/setmacroplayspeed.sh 0.1\"" >> ${homeDir}/.xbindkeysrc
 	echo "    release+Control + 4" >> ${homeDir}/.xbindkeysrc
 
+	mkdir ~/.xmacro/.cache
+
 	containsLine="0"
 	echo "" > ./newxinitrc~
 	while IFS= read -r line; do
@@ -148,6 +151,9 @@ if [ ! -f ${homeDir}/.xbindkeysrc ]; then
 		sudo rm -rdf /etc/X11/xinit/xinitrc
 		sudo mv ./newxinitrc~ /etc/X11/xinit/xinitrc
 	fi
+
+	cd ~/.xmacro
+	make all
 fi
 
 
