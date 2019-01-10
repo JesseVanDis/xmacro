@@ -50,6 +50,9 @@ if [ -f "./priorities.txt" ]; then
 				if [ "${didExecute}" = "1" ]; then
 					echo "executed ${f}!"
 					break
+				elif [ ! "${didExecute}" = "0" ]; then
+					notify-send "Xmacro" "${f} failed"
+					exit
 				fi
 			else
 				echo "ignoring: ${f} (done before)"				
@@ -63,6 +66,9 @@ if [ -f "./priorities.txt" ]; then
 			if [ "${didExecute}" = "1" ]; then
 				echo "executed ${f}!"
 				break
+			elif [ ! "${didExecute}" = "0" ]; then
+				notify-send "Xmacro" "${f} failed"
+				exit
 			fi
 			thingToIgnore=${thingToDoNext} #todo: support multiple stuff
 			thingToDoNext=""

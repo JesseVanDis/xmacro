@@ -1,8 +1,9 @@
-keen_navigate_to_loca
+[f]get_selected_text
+keen_showloca
+keen_navigate_to_loca_2
 keen_navigate_to_bdef
 keen_navigate_to_crc
 keen_navigate_to_ds
-[f]get_selected_text
 cpp_generate_declaration
 golang_expand_for_loop
 js_expand_for_loop
@@ -10,5 +11,6 @@ genericdataeditor_open_troto
 golang_expand_print_val
 golang_expand_print_err
 golang_a_walltotime
+keen_navigate_to_loca
 nautilus_convert_psd_to_png
 nautilus_update_product_file

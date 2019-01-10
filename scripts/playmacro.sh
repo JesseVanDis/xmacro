@@ -1,5 +1,17 @@
 #!/bin/bash
 cd "$(dirname "$0")"
+cd ./dowhatimean
+
+rm -rf ~/.xmacro/.cache/line
+rm -rf ~/.xmacro/.cache/selectedtext
+windowTitle=$(xdotool getwindowfocus getwindowname)
+windowProcess=$(ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}')
+echo "$windowTitle" > ~/.xmacro/.cache/windowTitle.txt
+echo "$windowProcess" > ~/.xmacro/.cache/windowProcess.txt
+
+source ./header.sh
+cd ../
+
 
 if [ -f ~/.xmacro/.cache/macro_${1}_recording.bool ]; then
 	notify-send "Xmacro" "Recording ended"
@@ -9,6 +21,7 @@ if [ -f ~/.xmacro/.cache/macro_${1}_recording.bool ]; then
 	rm -rf ~/.xmacro/.cache/macro_${1}_recording.bool
 	./macroedit_maxoutspeed.sh ~/.xmacro/.cache/macro_${1}.txt "1.5" > ~/.xmacro/.cache/macro_${1}_max.txt
 	./macroedit_maxoutspeed.sh ~/.xmacro/.cache/macro_${1}.txt "40" > ~/.xmacro/.cache/macro_${1}_maxvim.txt
+	./macroedit_maxoutspeed.sh ~/.xmacro/.cache/macro_${1}.txt "80" > ~/.xmacro/.cache/macro_${1}_maxclion.txt
 else
 #	if [ ! -f ~/.xmacro/.cache/macro_${1}_playing.bool ]; then
 #		echo "playing" > ~/.xmacro/.cache/macro_${1}_playing.bool
@@ -21,7 +34,14 @@ else
 
 		if [ -f ~/.xmacro/.cache/macro_speed.txt ]; then
 			speed=$(head -n 1 ~/.xmacro/.cache/macro_speed.txt)
-			if [ "${speed}" = "max" ]; then
+			
+			if [ "${IsCLion}" = "1" ]; then
+				~/.xmacro/xmacroplay -d 0 "$DISPLAY" < ~/.xmacro/.cache/macro_${1}_maxclion.txt				
+			elif [ "${IsSublime}" = "1" ]; then
+				~/.xmacro/xmacroplay -d 0 "$DISPLAY" < ~/.xmacro/.cache/macro_${1}_max.txt				
+			elif [ "${IsLibreOfficeCalc}" = "1" ]; then
+				~/.xmacro/xmacroplay -d 0 "$DISPLAY" < ~/.xmacro/.cache/macro_${1}_max.txt				
+			elif [ "${speed}" = "max" ]; then
 #				./macroedit_maxoutspeed.sh ~/.xmacro/.cache/macro_${1}.txt "1.5" > ~/.xmacro/.cache/macro_${1}_max.txt
 				~/.xmacro/xmacroplay -d 0 "$DISPLAY" < ~/.xmacro/.cache/macro_${1}_max.txt
 			elif [ "${speed}" = "maxvim" ]; then
