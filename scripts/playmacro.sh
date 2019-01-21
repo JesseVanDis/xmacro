@@ -21,7 +21,7 @@ if [ -f ~/.xmacro/.cache/macro_${1}_recording.bool ]; then
 	rm -rf ~/.xmacro/.cache/macro_${1}_recording.bool
 	./macroedit_maxoutspeed.sh ~/.xmacro/.cache/macro_${1}.txt "1.5" > ~/.xmacro/.cache/macro_${1}_max.txt
 	./macroedit_maxoutspeed.sh ~/.xmacro/.cache/macro_${1}.txt "40" > ~/.xmacro/.cache/macro_${1}_maxvim.txt
-	./macroedit_maxoutspeed.sh ~/.xmacro/.cache/macro_${1}.txt "80" > ~/.xmacro/.cache/macro_${1}_maxclion.txt
+	./macroedit_maxoutspeed.sh ~/.xmacro/.cache/macro_${1}.txt "80" "10" > ~/.xmacro/.cache/macro_${1}_maxclion.txt
 else
 #	if [ ! -f ~/.xmacro/.cache/macro_${1}_playing.bool ]; then
 #		echo "playing" > ~/.xmacro/.cache/macro_${1}_playing.bool

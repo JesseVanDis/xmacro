@@ -9,17 +9,28 @@ pasteDelay="40"
 t=~/.xmacro/.cache/t
 
 
-word=$(./functions/get_selected_text.sh)
-
-
 if [ "$IsTextEditor" = "1" ] && [[ "$WindowTitle" = *"rr2"* ]] && [[ "$WindowTitle" = *".cpp"* ]] && [[ ! "$WindowTitle" = *"_bdef"* ]]; then
 	selectedText=$(./functions/get_target_word.sh)
 
+	ok="0"
+	isInt="0"
+
 	if [ "$selectedText" = "s_a" ] || [ "$selectedText" = "s_b" ] || [ "$selectedText" = "s_c" ] || [ "$selectedText" = "s_d" ] || [ "$selectedText" = "s_e" ] || [ "$selectedText" = "s_f" ] || [ "$selectedText" = "s_g" ]; then		
+		ok="1"
+	elif [ "$selectedText" = "s_i" ]; then		
+		ok="1"
+		isInt="1"
+	fi
+
+	if [ "$ok" = "1" ]; then		
 
 		clipboardContents=`xsel -ob`
-		printf "KEEN_DEFINE_PF32_VARIABLE(___, "---", 0, -2000, 2000, \"\");" | xclip -selection clipboard
 
+		if [ "$isInt" = "1" ]; then
+			printf "KEEN_DEFINE_INT_VARIABLE(___, "---", 0, -10000, 10000, \"\");" | xclip -selection clipboard
+		else
+			printf "KEEN_DEFINE_PF32_VARIABLE(___, "---", 0, -2000, 2000, \"\");" | xclip -selection clipboard
+		fi
 #		notify-send "Xmacro" "'$selectedText'"
 
 		echo "#" > $t
