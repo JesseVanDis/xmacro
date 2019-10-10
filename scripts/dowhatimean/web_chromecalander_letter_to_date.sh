@@ -102,6 +102,20 @@ if [[ "$WindowTitle" = *"Google"* ]] && [[ "$WindowTitle" = *"alender"* ]] && [[
 	echo "DelayMs $tabStrokeDelay" >> $t
 	echo "KeyStrPress Tab" >> $t
 	echo "KeyStrRelease Tab" >> $t
+
+	echo "DelayMs $tabStrokeDelay" >> $t
+	echo "KeyStrPress Tab" >> $t
+	echo "KeyStrRelease Tab" >> $t
+	echo "DelayMs $tabStrokeDelay" >> $t
+	echo "KeyStrPress Tab" >> $t
+	echo "KeyStrRelease Tab" >> $t
+	echo "DelayMs $tabStrokeDelay" >> $t
+	echo "KeyStrPress Tab" >> $t
+	echo "KeyStrRelease Tab" >> $t
+	echo "DelayMs $tabStrokeDelay" >> $t
+	echo "KeyStrPress Tab" >> $t
+	echo "KeyStrRelease Tab" >> $t
+
 	echo "DelayMs $tabStrokeDelay" >> $t
 	echo "KeyStrPress Return" >> $t
 	echo "KeyStrRelease Return" >> $t
